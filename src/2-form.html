@@ -1,21 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Feedback Form</title>
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
-    <a class="back-link" href="./index.html">⬅ Back to Home</a>
-    <div class="form-container">
-      <form>
-        <label for="email">Email</label>
-        <input type="email" id="email" placeholder="Enter your email" />
+    <div class="page-container">
+      <a href="./index.html" class="back-to-home">← Back to Home</a>
 
-        <label for="message">Message</label>
-        <textarea id="message" placeholder="Type your message"></textarea>
-
+      <form class="feedback-form">
+        <label
+          >Email
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter your email"
+            autocomplete="off"
+          />
+        </label>
+        <label
+          >Message
+          <textarea name="message" placeholder="Type your message"></textarea>
+        </label>
         <button type="submit">Submit</button>
       </form>
     </div>
+
+    <script src="./2-form.html"></script>
   </body>
 </html>

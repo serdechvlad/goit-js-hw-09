@@ -67,10 +67,9 @@ const images = [
     description: 'Lighthouse Coast Sea',
   },
 ];
-// Получаем ссылку на список галереи
+
 const gallery = document.querySelector('.gallery');
 
-// Создаем и рендерим разметку
 const galleryMarkup = images
   .map(
     ({ preview, original, description }) => `
@@ -89,10 +88,9 @@ const galleryMarkup = images
 
 gallery.innerHTML = galleryMarkup;
 
-// Инициализируем SimpleLightbox
 const lightbox = new SimpleLightbox('.gallery a', {
-  captions: true, // включаем подписи
-  captionsData: 'alt', // берем текст из атрибута alt
-  captionPosition: 'bottom', // позиция подписи снизу
-  captionDelay: 250, // задержка перед показом подписи
+  captions: true,
+  captionsData: 'alt',
+  captionPosition: 'bottom',
+  captionDelay: 250,
 });

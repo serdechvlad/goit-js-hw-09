@@ -3,7 +3,6 @@ const emailInput = form.elements.email;
 const messageInput = form.elements.message;
 const STORAGE_KEY = 'feedback-form-state';
 
-// Подгружаем данные при загрузке
 loadFormData();
 
 form.addEventListener('input', onInput);
