@@ -3,10 +3,13 @@
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
-// Проверяем, есть ли галерея на странице
 const gallery = document.querySelector('.gallery');
 
-if (gallery) {
+if (!gallery) {
+  console.warn(
+    'Элемент .gallery не найден на странице. Скрипт галереи не будет выполнен.'
+  );
+} else {
   const images = [
     {
       preview:

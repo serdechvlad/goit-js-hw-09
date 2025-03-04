@@ -1,52 +1,41 @@
 'use strict';
 
 const form = document.querySelector('.feedback-form');
-const STORAGE_KEY = 'feedback-form-state';
 
-// Проверяем, есть ли форма на странице
-if (form) {
-  const emailInput = form.elements.email;
-  const messageInput = form.elements.message;
+if (!form) {
+  console.warn(
+    'Элемент .feedback-form не найден на странице. Скрипт формы не будет выполнен.'
+  );
+} else {
+  const STORAGE_KEY = 'feedback-form-state';
 
-  loadFormData();
+  const savedData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+  form.elements.email.value = savedData.email || '';
+  form.elements.message.value = savedData.message || '';
 
-  form.addEventListener('input', onInput);
-  form.addEventListener('submit', onSubmit);
-
-  function onInput() {
+  form.addEventListener('input', event => {
     const formData = {
-      email: emailInput.value.trim(),
-      message: messageInput.value.trim(),
+      email: form.elements.email.value,
+      message: form.elements.message.value,
     };
-
     localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
-  }
+  });
 
-  function loadFormData() {
-    const savedData = localStorage.getItem(STORAGE_KEY);
-    if (savedData) {
-      const { email, message } = JSON.parse(savedData);
-      emailInput.value = email || '';
-      messageInput.value = message || '';
-    }
-  }
-
-  function onSubmit(event) {
+  form.addEventListener('submit', event => {
     event.preventDefault();
 
-    const email = emailInput.value.trim();
-    const message = messageInput.value.trim();
+    const formData = {
+      email: form.elements.email.value.trim(),
+      message: form.elements.message.value.trim(),
+    };
 
-    if (!email || !message) {
-      alert('Please fill in both fields.');
+    if (!formData.email || !formData.message) {
+      alert('Пожалуйста, заполните все поля');
       return;
     }
 
-    console.log({ email, message });
-
+    console.log(formData);
     localStorage.removeItem(STORAGE_KEY);
     form.reset();
-  }
-} else {
-  console.warn('Форма не найдена на странице, скрипт не выполнен');
+  });
 }
