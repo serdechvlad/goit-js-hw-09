@@ -1,44 +1,52 @@
+'use strict';
+
 const form = document.querySelector('.feedback-form');
-const emailInput = form.elements.email;
-const messageInput = form.elements.message;
 const STORAGE_KEY = 'feedback-form-state';
 
-loadFormData();
+// Проверяем, есть ли форма на странице
+if (form) {
+  const emailInput = form.elements.email;
+  const messageInput = form.elements.message;
 
-form.addEventListener('input', onInput);
-form.addEventListener('submit', onSubmit);
+  loadFormData();
 
-function onInput() {
-  const formData = {
-    email: emailInput.value.trim(),
-    message: messageInput.value.trim(),
-  };
+  form.addEventListener('input', onInput);
+  form.addEventListener('submit', onSubmit);
 
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
-}
+  function onInput() {
+    const formData = {
+      email: emailInput.value.trim(),
+      message: messageInput.value.trim(),
+    };
 
-function loadFormData() {
-  const savedData = localStorage.getItem(STORAGE_KEY);
-  if (savedData) {
-    const { email, message } = JSON.parse(savedData);
-    emailInput.value = email || '';
-    messageInput.value = message || '';
-  }
-}
-
-function onSubmit(event) {
-  event.preventDefault();
-
-  const email = emailInput.value.trim();
-  const message = messageInput.value.trim();
-
-  if (!email || !message) {
-    alert('Please fill in both fields.');
-    return;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
   }
 
-  console.log({ email, message });
+  function loadFormData() {
+    const savedData = localStorage.getItem(STORAGE_KEY);
+    if (savedData) {
+      const { email, message } = JSON.parse(savedData);
+      emailInput.value = email || '';
+      messageInput.value = message || '';
+    }
+  }
 
-  localStorage.removeItem(STORAGE_KEY);
-  form.reset();
+  function onSubmit(event) {
+    event.preventDefault();
+
+    const email = emailInput.value.trim();
+    const message = messageInput.value.trim();
+
+    if (!email || !message) {
+      alert('Please fill in both fields.');
+      return;
+    }
+
+    console.log({ email, message });
+
+    localStorage.removeItem(STORAGE_KEY);
+    form.reset();
+  }
+} else {
+  console.warn('Форма не найдена на странице, скрипт не выполнен');
 }
