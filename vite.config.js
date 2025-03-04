@@ -10,6 +10,7 @@ export default defineConfig(({ command }) => {
       [command === 'serve' ? 'global' : '_global']: {},
     },
     root: 'src',
+    base: '/goit-js-hw-09/', // вот тут сразу прописываем base
     build: {
       sourcemap: true,
       rollupOptions: {
@@ -45,9 +46,4 @@ export default defineConfig(({ command }) => {
       }),
     ],
   };
-});
-import { defineConfig } from 'vite';
-
-export default defineConfig({
-  base: '/goit-js-hw-09/',  
 });
